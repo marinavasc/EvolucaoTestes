@@ -12,3 +12,4 @@ C:\Users\marin\Desktop\teste\EvolucaoTestes.IRPF\obj\Debug\net8.0\refint\Evoluca
 C:\Users\marin\Desktop\teste\EvolucaoTestes.IRPF\obj\Debug\net8.0\EvolucaoTestes.IRPF.pdb
 C:\Users\marin\Desktop\teste\EvolucaoTestes.IRPF\obj\Debug\net8.0\EvolucaoTestes.IRPF.genruntimeconfig.cache
 C:\Users\marin\Desktop\teste\EvolucaoTestes.IRPF\obj\Debug\net8.0\ref\EvolucaoTestes.IRPF.dll
+C:\Users\marin\Desktop\teste\EvolucaoTestes.IRPF\obj\Debug\net8.0\EvolucaoTestes.IRPF.sourcelink.json
