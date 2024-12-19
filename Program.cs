@@ -77,14 +77,13 @@ class Program
         void CalcularImpostoRenda(double salBruto, string nome)
             {
                 double parteTributavel = 0;
-                double desconto = 0;
                 double salLiquido = 0;
                 double aliquota = 0;
                 double deducao = 0;
 
                 if (salBruto <= 1903.98)
                 {
-                    desconto = 0;
+                    double desconto1 = 0;
                     salLiquido = salBruto;
                 }
                 else if (salBruto <= 2826.65)
@@ -92,40 +91,38 @@ class Program
                     parteTributavel = 2826.65 - 1903.98;
                     aliquota = 0.075;
                     deducao = 142.80;
-                    desconto = parteTributavel * aliquota - deducao;
-                    salLiquido = salBruto - desconto;
+                    double desconto2 = parteTributavel * aliquota - deducao;
+                    salLiquido = salBruto - desconto2;
                 }
                 else if (salBruto <= 3751.05)
                 {
                     parteTributavel = 3751.05 - 2826.65;
                     aliquota = 0.15;
                     deducao = 354.80;
-                    desconto = parteTributavel * aliquota - deducao;
-                    salLiquido = salBruto - desconto;
+                    double desconto3 = parteTributavel * aliquota - deducao;
+                    salLiquido = salBruto - desconto3;
                 }
                 else if (salBruto <= 4664.68)
                 {
                     parteTributavel = 4664.68 - 3751.05;
                     aliquota = 0.225;
                     deducao = 636.13;
-                    desconto = parteTributavel * aliquota - deducao;
-                    salLiquido = salBruto - desconto;
+                    double desconto4 = parteTributavel * aliquota - deducao;
+                    salLiquido = salBruto - desconto4;
                 }
                 else
                 {
                     aliquota = 0.275;
                     deducao = 869.36;
-                    desconto = parteTributavel * aliquota - deducao;
-                    salLiquido = salBruto - desconto;
+                    double desconto5 = parteTributavel * aliquota - deducao;
+                    salLiquido = salBruto - desconto5;
                 }
 
                 Console.WriteLine("\nNome do contribuinte: " + nome);
                 Console.WriteLine("Salário bruto: " + salBruto);
                 System.Console.WriteLine("Desconto: " + desconto);
                 Console.WriteLine("Salário líquido: " + salLiquido);
-                
-                ReceberDados();
-               
+              
             }
         }
     }
