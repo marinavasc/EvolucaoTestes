@@ -1,0 +1,73 @@
+using System;
+using System.Security.Cryptography.X509Certificates;
+using testeEvolucao;
+
+namespace testeEvolucao;
+public class CalculoImpostoRenda(double SalBruto, string Nome)
+{
+    public CalculandoImpostoRenda(double parteTributavel, double desconto, double salLiquido, double aliquota, double deducao) 
+    {
+        ParteTributavel = parteTributavel;
+        Desconto = desconto;
+        SalLiquido = salLiquido;
+        Aliquota = aliquota;
+        Deducao = deducao;
+    }
+
+    public double ParteTributavel { get; set; }
+    public double Desconto { get; set; }
+    public double SalLiquido { get; set; }
+    public double Aliquota { get; set; }
+    public double Deducao { get; set; }
+
+    public void CalcularImpostoRenda(double SalBruto, string Nome)
+    {
+        if (SalBruto <= 1903.98)
+        {
+            Desconto = 0;
+            SalLiquido = SalBruto;
+        }
+        else if (SalBruto <= 2826.65)
+        {
+            ParteTributavel = 2826.65 - 1903.98;
+            Aliquota = 0.075;
+            Deducao = 142.80;
+            double desconto2 = (SalBruto * Aliquota) - Deducao;
+            Desconto = desconto2;
+            SalLiquido = SalBruto - Desconto;
+        }
+        else if (SalBruto <= 3751.05)
+        {
+            ParteTributavel = 3751.05 - 2826.65;
+            Aliquota = 0.15;
+            Deducao = 354.80;
+            double desconto3 = (SalBruto * Aliquota) - Deducao;
+            Desconto = desconto3;
+            SalLiquido = SalBruto - Desconto;
+        }
+        else if (SalBruto <= 4664.68)
+        {
+            ParteTributavel = 4664.68 - 3751.05;
+            Aliquota = 0.225;
+            Deducao = 636.13;
+            double desconto4 = ParteTributavel * Aliquota - Deducao;
+            Desconto = desconto4;
+            SalLiquido = SalBruto - Desconto;
+        }
+        else
+        {
+            Aliquota = 0.275;
+            Deducao = 869.36;
+            double desconto5 = ParteTributavel * Aliquota - Deducao;
+            Desconto = desconto5;
+            SalLiquido = SalBruto - Desconto;
+        }
+
+        Console.WriteLine("Nome: " + Nome);
+        Console.WriteLine("Salário bruto: " + SalBruto);
+        Console.WriteLine("Salário líquido: " + SalLiquido);
+        Console.WriteLine("Imposto: " + Desconto);
+
+    }
+
+}
