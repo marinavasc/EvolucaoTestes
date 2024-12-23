@@ -1,26 +1,21 @@
 using System;
 using System.Security.Cryptography.X509Certificates;
-using testeEvolucao;
+namespace EvolucaoTestes.IRPF;
 
-namespace testeEvolucao;
-public class CalculoImpostoRenda(double SalBruto, string Nome)
+public class CalculoImpostoRenda
 {
-    public CalculandoImpostoRenda(double parteTributavel, double desconto, double salLiquido, double aliquota, double deducao) 
-    {
-        ParteTributavel = parteTributavel;
-        Desconto = desconto;
-        SalLiquido = salLiquido;
-        Aliquota = aliquota;
-        Deducao = deducao;
-    }
-
     public double ParteTributavel { get; set; }
     public double Desconto { get; set; }
     public double SalLiquido { get; set; }
     public double Aliquota { get; set; }
     public double Deducao { get; set; }
 
-    public void CalcularImpostoRenda(double SalBruto, string Nome)
+    public CalculoImpostoRenda()
+    {
+        CalcularImpostoRenda(double SalBruto, string Nome);
+    }
+
+    private void CalcularImpostoRenda(double SalBruto, string Nome)
     {
         if (SalBruto <= 1903.98)
         {

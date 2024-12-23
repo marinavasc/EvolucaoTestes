@@ -1,8 +1,7 @@
 using System;
 using System.Security.Cryptography.X509Certificates;
-using testeEvolucao;
+namespace EvolucaoTestes.IRPF;
 
-namespace testeEvolucao;
     public class AnalisarDados
     {
         public AnalisarDados(string nome, double salBruto)
