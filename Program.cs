@@ -7,28 +7,40 @@ class Program
     static void Main(string[] args)
     {
         Console.Write("Olá! Quantos contribuintes iremos calcular? ");
-        int num = int.Parse(Console.ReadLine()!);
-        try
+        string num = Console.ReadLine()!;
+
+        if(double.TryParse(num, out double result))
         {
-           for (int i = 0; i < num; i++)
+            for (int i = 0; i < result; i++)
             {
+                AnalisarDados analisar = new AnalisarDados("", 0);
+                analisar.ReceberDados();
 
-            var analisar = new AnalisarDados("", 0);
-            analisar.ReceberDados();
-
-            var calculo = new CalculoImpostoRenda(analisar.SalBruto);
-
-            Console.WriteLine($"\nContribuinte: {analisar.Nome}");
-            Console.WriteLine($"Salário bruto: {calculo.SalBruto}");
-            Console.WriteLine($"Salário Líquido: {calculo.SalLiquido}");
-            Console.WriteLine($"Imposto Descontado: {calculo.Desconto}");
-
+                CalculoImpostoRenda calculo = new CalculoImpostoRenda();
+                calculo.CalcularImpostoRenda(analisar.SalBruto, analisar.Nome);
             }
         }
-        catch
+        else
         {
             Console.WriteLine("Digite um valor válido.");
         }
-        
+        // try
+        // {
+        //     for (int i = 0; i < num; i++)
+        //     {
+
+        //         AnalisarDados analisar = new AnalisarDados("", 0);
+        //         analisar.ReceberDados();
+
+        //         CalculoImpostoRenda calculo = new CalculoImpostoRenda();
+        //         calculo.CalcularImpostoRenda(analisar.SalBruto, analisar.Nome);
+
+
+        //     }
+        // }
+        // catch
+        // {
+        //     Console.WriteLine("Digite um valor válido.");
+        // }
     }
 }

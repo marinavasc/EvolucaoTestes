@@ -4,18 +4,12 @@ namespace EvolucaoTestes.IRPF;
 
 public class CalculoImpostoRenda
 {
-    public double ParteTributavel { get; set; }
     public double Desconto { get; set; }
     public double SalLiquido { get; set; }
     public double Aliquota { get; set; }
     public double Deducao { get; set; }
 
-    public CalculoImpostoRenda()
-    {
-        CalcularImpostoRenda(double SalBruto, string Nome);
-    }
-
-    private void CalcularImpostoRenda(double SalBruto, string Nome)
+    public void CalcularImpostoRenda(double SalBruto, string Nome)
     {
         if (SalBruto <= 1903.98)
         {
@@ -24,44 +18,38 @@ public class CalculoImpostoRenda
         }
         else if (SalBruto <= 2826.65)
         {
-            ParteTributavel = 2826.65 - 1903.98;
             Aliquota = 0.075;
             Deducao = 142.80;
-            double desconto2 = (SalBruto * Aliquota) - Deducao;
-            Desconto = desconto2;
+            Desconto = (SalBruto * Aliquota) - Deducao;
             SalLiquido = SalBruto - Desconto;
         }
         else if (SalBruto <= 3751.05)
         {
-            ParteTributavel = 3751.05 - 2826.65;
             Aliquota = 0.15;
             Deducao = 354.80;
-            double desconto3 = (SalBruto * Aliquota) - Deducao;
-            Desconto = desconto3;
+            Desconto = (SalBruto * Aliquota) - Deducao;
             SalLiquido = SalBruto - Desconto;
         }
         else if (SalBruto <= 4664.68)
         {
-            ParteTributavel = 4664.68 - 3751.05;
             Aliquota = 0.225;
             Deducao = 636.13;
-            double desconto4 = ParteTributavel * Aliquota - Deducao;
-            Desconto = desconto4;
+            Desconto = (SalBruto * Aliquota) - Deducao;
             SalLiquido = SalBruto - Desconto;
         }
         else
         {
             Aliquota = 0.275;
             Deducao = 869.36;
-            double desconto5 = ParteTributavel * Aliquota - Deducao;
-            Desconto = desconto5;
+            Desconto = (SalBruto * Aliquota) - Deducao;
             SalLiquido = SalBruto - Desconto;
         }
 
-        Console.WriteLine("Nome: " + Nome);
-        Console.WriteLine("Salário bruto: " + SalBruto);
-        Console.WriteLine("Salário líquido: " + SalLiquido);
-        Console.WriteLine("Imposto: " + Desconto);
+        Console.WriteLine("\nResultados do Cálculo:");
+        Console.WriteLine($"\nNome: {Nome}");
+        Console.WriteLine($"Salário bruto: {SalBruto.ToString("C2")}");
+        Console.WriteLine($"Imposto: {Desconto.ToString("C2")}");
+        Console.WriteLine($"Salário líquido: {SalLiquido.ToString("C2")}\n");
 
     }
 
