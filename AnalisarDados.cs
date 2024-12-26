@@ -20,11 +20,11 @@ public class AnalisarNome
         {
             Nome = Console.ReadLine()!;
 
-            if (System.Text.RegularExpressions.Regex.IsMatch(Nome, @"^[a-zA-Z]+$"))
+            if (string.IsNullOrWhiteSpace(Nome))
             {
-                double salarioTemporario = SalBruto;
-                AnalisarSalario.ReceberSalario(ref salarioTemporario);
-                SalBruto = salarioTemporario; 
+               System.Console.WriteLine("\nDigite um nome válido. \nDigite qualquer tecla para voltar.");
+                Console.ReadKey();
+                ReceberNome();
             }
             else if (Nome == "")
             {
@@ -34,9 +34,9 @@ public class AnalisarNome
             }
             else
             {
-                System.Console.WriteLine("\nDigite um nome válido. \nDigite qualquer tecla para voltar.");
-                Console.ReadKey();
-                ReceberNome();
+                 double salarioTemporario = SalBruto;
+                AnalisarSalario.ReceberSalario(ref salarioTemporario);
+                SalBruto = salarioTemporario; 
             }
 
         }
