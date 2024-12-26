@@ -18,7 +18,7 @@ class Program
         {
             if (double.TryParse(num, out double resultado))
         {
-            for (int i = 1; i < resultado; i++)
+            for (int i = 0; i < resultado; i++)
             {
                 AnalisarNome analisar = new AnalisarNome("", 0);
                 analisar.ReceberNome();

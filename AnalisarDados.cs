@@ -16,8 +16,7 @@ public class AnalisarNome
     public void ReceberNome()
     {
         Console.Write("\nQual seu nome? ");
-        try
-        {
+
             Nome = Console.ReadLine()!;
 
             if (string.IsNullOrWhiteSpace(Nome))
@@ -38,13 +37,5 @@ public class AnalisarNome
                 AnalisarSalario.ReceberSalario(ref salarioTemporario);
                 SalBruto = salarioTemporario; 
             }
-
         }
-        catch
-        {
-            System.Console.WriteLine("\nDigite um nome válido. \nDigite qualquer tecla para voltar.");
-            Console.ReadKey();
-            ReceberNome();
-        }
-    }
 }
