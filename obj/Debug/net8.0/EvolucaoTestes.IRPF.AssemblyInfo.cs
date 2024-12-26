@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EvolucaoTestes.IRPF")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+20d8bd6d4fc3e1a44e2fe08b4dd4e777e7526a7c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8f73fb42bec2214977aa4aa550b782b8ba3acd6a")]
 [assembly: System.Reflection.AssemblyProductAttribute("EvolucaoTestes.IRPF")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EvolucaoTestes.IRPF")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
