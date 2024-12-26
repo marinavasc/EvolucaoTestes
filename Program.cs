@@ -21,6 +21,12 @@ class Program
 
                 CalculoImpostoRenda calculo = new CalculoImpostoRenda();
                 calculo.CalcularImpostoRenda(SalBruto, Nome);
+
+                System.Console.WriteLine("\nSe deseja voltar ao íncio para calcular mais um contribuinte, digite 'sim'. \nCaso contrário, só digitar qualquer outra coisa. ");
+                string sim = Console.ReadLine()!;
+                if (sim == "sim") 
+                { Main(args); }
+
             }
         }
         else
@@ -33,3 +39,4 @@ class Program
     }
 
 }
+//EvolucaoTestes.IRPF
