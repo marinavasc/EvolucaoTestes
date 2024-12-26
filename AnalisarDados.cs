@@ -2,18 +2,18 @@ using System;
 using System.Security.Cryptography.X509Certificates;
 namespace EvolucaoTestes.IRPF;
 
-public class AnalisarDados
+public class AnalisarNome
 {
-    public AnalisarDados(string nome, double salBruto)
+    public AnalisarNome(string nome, double salBruto)
     {
         Nome = nome;
         SalBruto = salBruto;
     }
 
-    public string Nome { get; set; }
     public double SalBruto { get; set; }
+    public string Nome { get; set; }
 
-    public void ReceberDados()
+    public void ReceberNome()
     {
         Console.Write("\nQual seu nome? ");
         try
@@ -22,36 +22,21 @@ public class AnalisarDados
 
             if (System.Text.RegularExpressions.Regex.IsMatch(Nome, @"^[a-zA-Z]+$"))
             {
-                Console.Write("E qual seu salário bruto? ");
-                string salBrutoString = Console.ReadLine()!;
-
-                try
-                {
-                    SalBruto = double.Parse(salBrutoString);
-                    if (SalBruto <= 0)
-                    {
-                        throw new Exception("Digite um valor válido.");
-                    }
-                }
-                catch
-                {
-                    Console.WriteLine("\nValor inválido. ");
-                    Console.WriteLine("Digite qualquer tecla para voltar.");
-                    Console.ReadKey();
-                    ReceberDados();
-                }
+                double salarioTemporario = SalBruto;
+                AnalisarSalario.ReceberSalario(ref salarioTemporario);
+                SalBruto = salarioTemporario; 
             }
             else if (Nome == "")
             {
                 System.Console.WriteLine("\nDigite um nome válido. \nDigite qualquer tecla para voltar.");
                 Console.ReadKey();
-                ReceberDados();
+                ReceberNome();
             }
             else
             {
                 System.Console.WriteLine("\nDigite um nome válido. \nDigite qualquer tecla para voltar.");
                 Console.ReadKey();
-                ReceberDados();
+                ReceberNome();
             }
 
         }
@@ -59,7 +44,7 @@ public class AnalisarDados
         {
             System.Console.WriteLine("\nDigite um nome válido. \nDigite qualquer tecla para voltar.");
             Console.ReadKey();
-            ReceberDados();
+            ReceberNome();
         }
     }
 }

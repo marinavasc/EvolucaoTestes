@@ -6,24 +6,26 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.Write("Olá! Quantos contribuintes iremos calcular? ");
+        Console.Write("\nOlá! Quantos contribuintes iremos calcular? ");
         string num = Console.ReadLine()!;
 
-        if (double.TryParse(num, out double result))
+        if (double.TryParse(num, out double resultado))
         {
-            for (int i = 0; i < result; i++)
+            for (int i = 0; i < resultado; i++)
             {
-                AnalisarDados analisar = new AnalisarDados("", 0);
-                analisar.ReceberDados();
+                AnalisarNome analisar = new AnalisarNome("", 0);
+                analisar.ReceberNome();
+
+                double SalBruto = analisar.SalBruto;
+                string Nome = analisar.Nome;
 
                 CalculoImpostoRenda calculo = new CalculoImpostoRenda();
-                calculo.CalcularImpostoRenda(analisar.SalBruto, analisar.Nome);
+                calculo.CalcularImpostoRenda(SalBruto, Nome);
             }
         }
         else
         {
-            // Console.WriteLine("Digite um valor válido.");
-            Console.WriteLine("\nDigite um valor válido.\nPressione qualquer tecla para voltar.\n");
+            Console.WriteLine("\nDigite um valor válido.\nPressione qualquer tecla para voltar.");
             Console.ReadKey();
             Main(args);
 
@@ -31,23 +33,3 @@ class Program
     }
 
 }
-
-
-// try
-// {
-//     for (int i = 0; i < num; i++)
-//     {
-
-//         AnalisarDados analisar = new AnalisarDados("", 0);
-//         analisar.ReceberDados();
-
-//         CalculoImpostoRenda calculo = new CalculoImpostoRenda();
-//         calculo.CalcularImpostoRenda(analisar.SalBruto, analisar.Nome);
-
-
-//     }
-// }
-// catch
-// {
-//     Console.WriteLine("Digite um valor válido.");
-// }
