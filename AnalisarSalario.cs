@@ -12,8 +12,14 @@ public class AnalisarSalario
 
             if (double.TryParse(salBrutoString, out double salBruto)) SalBruto = salBruto;
             
-            else if (SalBruto < 1412) Console.WriteLine("Valor mínimo igual a R$1.412,00.");
-            
+            else if (SalBruto < 1412) 
+            {Console.WriteLine("Valor mínimo igual a R$1.412,00."); 
+            ReceberSalario(ref SalBruto);
+            }
+            else if (SalBruto == 0) 
+            {Console.WriteLine("Valor inválido.");
+            ReceberSalario(ref SalBruto);
+            }
             else Console.WriteLine("Valor inválido.");
     }
 }
