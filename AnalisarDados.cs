@@ -4,10 +4,9 @@ namespace EvolucaoTestes.IRPF;
 
 public class AnalisarNome
 {
-    public AnalisarNome(string nome, double salBruto)
+    public AnalisarNome(string nome)
     {
         Nome = nome;
-        SalBruto = salBruto;
     }
 
     public double SalBruto { get; set; }
@@ -15,21 +14,14 @@ public class AnalisarNome
 
     public void ReceberNome()
     {
-        Console.Write("\nQual seu nome? ");
-
-            Nome = Console.ReadLine()!;
-
-            if (string.IsNullOrWhiteSpace(Nome))
-            {
-               System.Console.WriteLine("\nDigite um nome válido. \nDigite qualquer tecla para voltar.");
-                Console.ReadKey();
-                ReceberNome();
-            }
-            else
-            {
-                 double salarioTemporario = SalBruto;
-                AnalisarSalario.ReceberSalario(ref salarioTemporario);
-                SalBruto = salarioTemporario; 
-            }
+        if (string.IsNullOrWhiteSpace(Nome))
+        {
+            Console.ReadKey();
+            ReceberNome();
         }
+        else
+        {
+            
+        }
+    }
 }
