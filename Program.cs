@@ -110,7 +110,7 @@ class Program
         Console.Write("\nOlá! Quantos contribuintes iremos calcular? ");
         string num = Console.ReadLine()!;
 
-        if (double.TryParse(num, out double num2))
+        if (double.TryParse(num, out double num2) && num2 > 0)
         {
             for (int i = 0; i < num2; i++)
             {
@@ -123,7 +123,7 @@ class Program
                 CalculoImpostoRenda calculo = new CalculoImpostoRenda();
                 calculo.CalcularImpostoRenda(SalBruto, Nome);
 
-                System.Console.WriteLine($"Nome: {analisar.Nome}");
+                System.Console.WriteLine($"\nNome: {analisar.Nome}");
                 System.Console.WriteLine($"Salário bruto: {analisar.SalBruto.ToString("C2")}");
                 System.Console.WriteLine($"Salário líquido: {calculo.salLiquido.ToString("C2")}");
                 System.Console.WriteLine($"Imposto: {calculo.desconto.ToString("C2")}");
@@ -133,12 +133,6 @@ class Program
             string sim = Console.ReadLine()!;
             if (sim == "sim")
             { Main(args); }
-        }
-        else if (num2 == 0)
-        {
-            Console.WriteLine("\nDigite um valor válido.\nPressione qualquer tecla para voltar.");
-            Console.ReadKey();
-            Main(args);
         }
         else
         {
