@@ -10,16 +10,21 @@ public class AnalisarSalario
         Console.Write("E qual seu salário bruto? ");
         string salBrutoString = Console.ReadLine()!;
 
-            if (double.TryParse(salBrutoString, out double salBruto)) SalBruto = salBruto;
-            
-            else if (SalBruto < 1412) 
-            {Console.WriteLine("Valor mínimo igual a R$1.412,00."); 
-            ReceberSalario(ref SalBruto);
+        if (double.TryParse(salBrutoString, out double salBruto))
+        {
+            if (salBruto < 1412)
+            {
+                Console.WriteLine("O valor mínimo permitido é R$1.412,00.");
+                ReceberSalario(ref SalBruto);
             }
-            else if (SalBruto == 0) 
-            {Console.WriteLine("Valor inválido.");
+
+            else SalBruto = salBruto;
+        }
+        else
+        {
+            Console.WriteLine("Valor inválido. Insira um número válido.");
             ReceberSalario(ref SalBruto);
-            }
-            else Console.WriteLine("Valor inválido.");
+        }
     }
+
 }

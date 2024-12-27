@@ -129,6 +129,10 @@ class Program
                 System.Console.WriteLine($"Imposto: {calculo.desconto.ToString("C2")}");
 
             }
+            System.Console.WriteLine("\nSe deseja voltar ao íncio para calcular mais um contribuinte, digite 'sim'. \nCaso contrário, só digitar qualquer outra coisa. ");
+            string sim = Console.ReadLine()!;
+            if (sim == "sim")
+            { Main(args); }
         }
         else if (num2 == 0)
         {

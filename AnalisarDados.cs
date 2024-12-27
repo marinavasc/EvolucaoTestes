@@ -25,12 +25,6 @@ public class AnalisarNome
                 Console.ReadKey();
                 ReceberNome();
             }
-            else if (Nome == "")
-            {
-                System.Console.WriteLine("\nDigite um nome válido. \nDigite qualquer tecla para voltar.");
-                Console.ReadKey();
-                ReceberNome();
-            }
             else
             {
                  double salarioTemporario = SalBruto;
