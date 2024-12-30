@@ -4,18 +4,34 @@ namespace EvolucaoTestes.IRPF;
 
 public class AnalisarSalario
 {
-    public double SalBruto { get; set; }
+    // public double SalBruto { get; set; }
 
-    public void ReceberSalario(double SalBruto)
+    // public void ReceberSalario(double SalBruto)
+    // {
+    //     try
+    //     {
+    //         if (double.TryParse(Console.ReadLine(), out double salBruto))
+    //         {
+    //             SalBruto = salBruto;
+    //         }
+    //         else
+    //         {
+    //             throw new Exception();
+    //         }
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         Console.ReadKey();
+    //         ReceberSalario(SalBruto);
+    //     }
+    // }
+    public static bool ValidarSalario(string? input, out double salarioBruto)
     {
-        try
+        if (double.TryParse(input, out salarioBruto) && salarioBruto > 1412)
         {
-            
+            return true;
         }
-        catch (Exception e)
-        {
-            Console.ReadKey();
-            ReceberSalario(SalBruto);
-        }
+        salarioBruto = 0;
+        return false;
     }
 }

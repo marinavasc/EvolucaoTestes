@@ -6,56 +6,36 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.Write("\nOlá! Quantos contribuintes iremos calcular? ");
-        string num = Console.ReadLine()!;
-
-        if (double.TryParse(num, out double num2) && num2 > 0)
+ Console.Write("\nOlá! Quantos contribuintes iremos calcular? ");
+        if (double.TryParse(Console.ReadLine(), out double numContribuintes) && numContribuintes > 0)
         {
-            for (int i = 0; i < num2; i++)
+            for (int i = 0; i < numContribuintes; i++)
             {
-                Console.Write("\nQual seu nome? ");
-                string nome = Console.ReadLine()!;
-                if (string.IsNullOrWhiteSpace(nome))
+                string nome;
+                do
                 {
-                    System.Console.WriteLine("\nDigite um nome válido.\nPressione qualquer tecla para voltar.");
-                    Console.ReadKey();
-                    Main(args);
-                }
+                    Console.Write("\nQual seu nome? ");
+                    nome = Console.ReadLine()!;
+                } while (!AnalisarNome.ValidarNome(nome));
 
-                Console.Write("E qual seu salário bruto? ");
-                string salBrutoString = Console.ReadLine()!;
-                if (double.TryParse(salBrutoString, out double salBruto))
+                double SalBruto;
+                do
                 {
-                    AnalisarNome analisar = new AnalisarNome(nome);
-                    analisar.ReceberNome();
-                    
-                    AnalisarSalario salario = new AnalisarSalario();
-                    double SalBruto = salario.SalBruto;
-                    salario.ReceberSalario(SalBruto);
+                    Console.Write("E qual seu salário bruto? ");
+                } while (!AnalisarSalario.ValidarSalario(Console.ReadLine(), out SalBruto));
 
-                    string Nome = analisar.Nome;
+                CalculoImpostoRenda calculo = new CalculoImpostoRenda();
+                calculo.CalcularImpostoRenda(SalBruto);
 
-                    CalculoImpostoRenda calculo = new CalculoImpostoRenda();
-                    calculo.CalcularImpostoRenda(SalBruto, Nome);
-
-                    System.Console.WriteLine($"\nNome: {analisar.Nome}");
-                    System.Console.WriteLine($"Salário bruto: {salario.SalBruto.ToString("C2")}");
-                    System.Console.WriteLine($"Salário líquido: {calculo.salLiquido.ToString("C2")}");
-                    System.Console.WriteLine($"Imposto: {calculo.desconto.ToString("C2")}");
-
-                }
-                System.Console.WriteLine("\nSe deseja voltar ao íncio para calcular mais um contribuinte, digite 'sim'. \nCaso contrário, só digitar qualquer outra coisa. ");
-                string sim = Console.ReadLine()!;
-                if (sim == "sim")
-                { Main(args); }
+                Console.WriteLine($"\nNome: {nome}");
+                Console.WriteLine($"Salário bruto: {SalBruto.ToString("C2")}");
+                Console.WriteLine($"Salário líquido: {calculo.SalLiquido.ToString("C2")}");
+                Console.WriteLine($"Imposto: {calculo.Desconto.ToString("C2")}");
             }
         }
         else
         {
-            Console.WriteLine("\nDigite um valor válido.\nPressione qualquer tecla para voltar.");
-            Console.ReadKey();
-            Main(args);
+            Console.WriteLine("\nDigite um valor válido.");
         }
     }
-
 }
