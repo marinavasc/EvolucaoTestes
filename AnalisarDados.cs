@@ -4,28 +4,20 @@ namespace EvolucaoTestes.IRPF;
 
 public class AnalisarNome
 {
-    // public AnalisarNome(string nome)
-    // {
-    //     Nome = nome;
-    // }
-
-    // public double SalBruto { get; set; }
-    // public string Nome { get; set; }
-
-    // public void ReceberNome()
-    // {
-    //     if (string.IsNullOrWhiteSpace(Nome))
-    //     {
-    //         Console.ReadKey();
-    //         ReceberNome();
-    //     }
-    //     else
-    //     {
-            
-    //     }
-    // }
-    public static bool ValidarNome(string nome)
+    public AnalisarNome(string nome)
     {
-        return !string.IsNullOrWhiteSpace(nome);
+        Nome = nome;
+    }
+
+    public string Nome { get; set; }
+
+    public void ReceberNome(string nome)
+    {
+        if (string.IsNullOrWhiteSpace(nome))
+        {
+            System.Console.WriteLine("Nome inválido. Digite novamente.");
+            ReceberNome(Nome);
+
+        }
     }
 }

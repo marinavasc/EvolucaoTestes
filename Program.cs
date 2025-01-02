@@ -6,23 +6,28 @@ class Program
 {
     static void Main(string[] args)
     {
- Console.Write("\nOlá! Quantos contribuintes iremos calcular? ");
+        Console.Write("\nOlá! Quantos contribuintes iremos calcular? ");
         if (double.TryParse(Console.ReadLine(), out double numContribuintes) && numContribuintes > 0)
         {
             for (int i = 0; i < numContribuintes; i++)
             {
-                string nome;
-                do
+                System.Console.WriteLine("Qual seu nome? ");
+                string nome = Console.ReadLine()!;
+                if (string.IsNullOrWhiteSpace(nome))
                 {
-                    Console.Write("\nQual seu nome? ");
-                    nome = Console.ReadLine()!;
-                } while (!AnalisarNome.ValidarNome(nome));
+                    System.Console.WriteLine("Nome inválido. Digite novamente.");
+                    i--;
+                    // voltar ao inicio
+                    break;
+                }
 
-                double SalBruto;
-                do
-                {
-                    Console.Write("E qual seu salário bruto? ");
-                } while (!AnalisarSalario.ValidarSalario(Console.ReadLine(), out SalBruto));
+                AnalisarNome novoNome = new AnalisarNome(nome);
+                novoNome.ReceberNome(nome);
+
+                System.Console.WriteLine("Qual seu salário bruto? ");
+                AnalisarSalario salario = new AnalisarSalario();
+                double SalBruto = double.Parse(Console.ReadLine()!);
+                salario.ReceberSalario(SalBruto);
 
                 CalculoImpostoRenda calculo = new CalculoImpostoRenda();
                 calculo.CalcularImpostoRenda(SalBruto);
@@ -36,6 +41,7 @@ class Program
         else
         {
             Console.WriteLine("\nDigite um valor válido.");
+            // voltar ao inicio
         }
     }
 }
