@@ -6,15 +6,15 @@ public class AnalisarSalario
 {
     public double SalBruto { get; set; }
 
-
-    public void ReceberSalario(double SalBruto)
+    public void ReceberSalario(string salBruto)
     {
-        if (SalBruto > 1412)
-        {
-            System.Console.WriteLine("Nome inválido. Digite novamente.");
-            ReceberSalario(SalBruto);
-        }
+        if (string.IsNullOrWhiteSpace(salBruto))
+            throw new ArgumentNullException("Salário","Salário obrigatório. Digite novamente.");
+
+        if (double.TryParse(salBruto, out double _salBruto))
+            SalBruto = _salBruto;
+        else
+            throw new ArgumentNullException("Salário","Salário inválido. Digite novamente.");
 
     }
-
 }

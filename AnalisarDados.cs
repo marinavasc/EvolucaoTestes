@@ -15,9 +15,7 @@ public class AnalisarNome
     {
         if (string.IsNullOrWhiteSpace(nome))
         {
-            System.Console.WriteLine("Nome inválido. Digite novamente.");
-            ReceberNome(Nome);
-
+            throw new ArgumentNullException("Nome","Nome inválido. Digite novamente.");
         }
     }
 }

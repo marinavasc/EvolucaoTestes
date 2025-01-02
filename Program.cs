@@ -11,31 +11,17 @@ class Program
         {
             for (int i = 0; i < numContribuintes; i++)
             {
-                System.Console.WriteLine("Qual seu nome? ");
-                string nome = Console.ReadLine()!;
-                if (string.IsNullOrWhiteSpace(nome))
-                {
-                    System.Console.WriteLine("Nome inválido. Digite novamente.");
-                    i--;
-                    // voltar ao inicio
-                    break;
-                }
+                var nome = receberNome();
 
-                AnalisarNome novoNome = new AnalisarNome(nome);
-                novoNome.ReceberNome(nome);
-
-                System.Console.WriteLine("Qual seu salário bruto? ");
-                AnalisarSalario salario = new AnalisarSalario();
-                double SalBruto = double.Parse(Console.ReadLine()!);
-                salario.ReceberSalario(SalBruto);
+                var salario = receberSalario();
 
                 CalculoImpostoRenda calculo = new CalculoImpostoRenda();
-                calculo.CalcularImpostoRenda(SalBruto);
+                calculo.CalcularImpostoRenda(salario.SalBruto);
 
-                Console.WriteLine($"\nNome: {nome}");
-                Console.WriteLine($"Salário bruto: {SalBruto.ToString("C2")}");
+                Console.WriteLine($"\nNome: {nome.Nome}");
+                Console.WriteLine($"Salário bruto: {salario.SalBruto.ToString("C2")}");
                 Console.WriteLine($"Salário líquido: {calculo.SalLiquido.ToString("C2")}");
-                Console.WriteLine($"Imposto: {calculo.Desconto.ToString("C2")}");
+                Console.WriteLine($"Imposto: {calculo.Desconto.ToString("C2")}\n");
             }
         }
         else
@@ -43,5 +29,52 @@ class Program
             Console.WriteLine("\nDigite um valor válido.");
             // voltar ao inicio
         }
+    }
+
+
+    private static AnalisarNome receberNome()
+    {
+        Console.WriteLine("Qual seu nome? ");
+        string? nome = Console.ReadLine();
+        AnalisarNome novoNome = new AnalisarNome(nome);
+        try
+        {
+            novoNome.ReceberNome(nome);
+        }
+        catch (ArgumentNullException aNe)
+        {
+            Console.WriteLine(aNe.Message);
+            receberNome();
+        }
+        catch
+        {
+            Console.WriteLine("Erro inesperado. Procure o administrador do sistema");
+            Console.ReadLine();
+            receberNome();
+        }
+        return novoNome;
+    }
+
+    private static AnalisarSalario receberSalario()
+    {
+        Console.WriteLine("Qual seu salário bruto? ");
+        string? salBruto = Console.ReadLine();
+        AnalisarSalario salario = new AnalisarSalario();
+        try
+        {
+            salario.ReceberSalario(salBruto);
+        }
+        catch (ArgumentNullException aEx)
+        {
+            Console.WriteLine(aEx.Message);
+            receberSalario();
+        }
+        catch
+        {
+            Console.WriteLine("Erro inesperado. Procure o administrador do sistema");
+            Console.ReadLine();
+            receberSalario();
+        }
+        return salario;
     }
 }
