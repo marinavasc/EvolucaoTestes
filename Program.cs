@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Security.Cryptography.X509Certificates;
 namespace EvolucaoTestes.IRPF;
 
 class Program
 {
     static void Main(string[] args)
     {
-        NumContribuintes();
+        RecebendoContribuintes();
     }
 
-    private static void NumContribuintes()
+    private static void RecebendoContribuintes()
     {
         Console.Write("\nOlá! Quantos contribuintes iremos calcular? ");
         try
@@ -22,35 +21,57 @@ class Program
 
                     var salario = receberSalario();
 
-                    CalculoImpostoRenda calculo = new CalculoImpostoRenda();
-                    calculo.CalcularImpostoRenda(salario.SalBruto);
+                    ImpostoRenda calculo = new ImpostoRenda();
+                    calculo.CalcularImpostoRenda(salario.SalarioBruto);
 
                     Console.WriteLine($"\nNome: {nome.Nome}");
-                    Console.WriteLine($"Salário bruto: {salario.SalBruto.ToString("C2")}");
+                    Console.WriteLine($"Salário bruto: {salario.SalarioBruto.ToString("C2")}");
                     Console.WriteLine($"Desconto: {calculo.Desconto.ToString("C2")}");
-                    Console.WriteLine($"Salário líquido: {calculo.SalLiquido.ToString("C2")}");
-                    Novamente();
+                    Console.WriteLine($"Salário líquido: {calculo.SalarioLiquido.ToString("C2")}");
                 }
+                Novamente();
             }
             else
             {
                 Console.WriteLine("\nDigite um valor válido.");
-                NumContribuintes();
+                RecebendoContribuintes();
             }
         }
         catch
         {
             Console.WriteLine("Erro inesperado. Procure o administrador do sistema");
             Console.ReadLine();
-            NumContribuintes();
+            RecebendoContribuintes();
         }
     }
 
-    private static AnalisarNome receberNome()
+    private static Contribuinte receberNumeroContribuinte()
+    {
+        Console.WriteLine("Quantos contribuintes iremos calcular? ");
+        string? contribuinte = Console.ReadLine();
+        Contribuinte novoNome = new Contribuinte(contribuinte);
+        try
+        {
+            novoNome.ReceberNumeroContribuintes(contribuinte);
+        }
+        catch (ArgumentNullException aNe)
+        {
+            Console.WriteLine(aNe.Message);
+            novoNome = receberNumeroContribuinte();
+        }
+        catch
+        {
+            Console.WriteLine("Erro inesperado. Procure o administrador do sistema");
+            Console.ReadLine();
+        }
+        return novoNome;
+    }
+
+    private static Pessoa receberNome()
     {
         Console.WriteLine("Qual seu nome? ");
         string? nome = Console.ReadLine();
-        AnalisarNome novoNome = new AnalisarNome(nome);
+        Pessoa novoNome = new Pessoa(nome);
         try
         {
             novoNome.ReceberNome(nome);
@@ -64,19 +85,18 @@ class Program
         {
             Console.WriteLine("Erro inesperado. Procure o administrador do sistema");
             Console.ReadLine();
-            novoNome = receberNome();
         }
         return novoNome;
     }
 
-    private static AnalisarSalario receberSalario()
+    private static Salario receberSalario()
     {
         Console.WriteLine("Qual seu salário bruto? ");
-        string? salBruto = Console.ReadLine();
-        AnalisarSalario salario = new AnalisarSalario();
+        string? salarioBruto = Console.ReadLine();
+        Salario salario = new Salario();
         try
         {
-            salario.ReceberSalario(salBruto);
+            salario.ReceberSalario(salarioBruto);
         }
         catch (ArgumentNullException aEx)
         {
@@ -98,7 +118,7 @@ class Program
         {
             string? resposta = Console.ReadLine();
             if (resposta == "S")
-                NumContribuintes();
+                RecebendoContribuintes();
             
             else Console.WriteLine("Até mais.");            
         }
