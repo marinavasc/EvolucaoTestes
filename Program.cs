@@ -28,7 +28,7 @@ class Program
                 Console.WriteLine($"Desconto: {calculo.Desconto.ToString("C2")}");
                 Console.WriteLine($"Salário líquido: {calculo.SalarioLiquido.ToString("C2")}");
             }
-            Novamente();
+            novamente();
         }
         catch
         {
@@ -104,7 +104,7 @@ class Program
         }
         return salario;
     }
-    private static void Novamente()
+    private static void novamente()
     {
         System.Console.WriteLine("Deseja calcular novamente? Digite 'S'.");
         try
