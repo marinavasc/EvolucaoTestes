@@ -1,145 +1,123 @@
-﻿// using System;
-// using System.Data.Common;
-// using System.Security.Cryptography.X509Certificates;
-// namespace EvolucaoTestes.IRPF;
-
-// class Program
-// {
-//     static void Main(string[] args)
-//     {
-//         Console.Write("\nOlá! Quantos contribuintes iremos calcular? ");
-//         string num = Console.ReadLine()!;
-
-//         try
-//         {
-//             if (num == "0")
-//             {
-//                 Console.WriteLine("\nDigite um valor válido.\nPressione qualquer tecla para voltar.");
-//                 Console.ReadKey();
-//                 Main(args);
-//             }
-//             else if (double.TryParse(num, out double num2))
-//             {
-//                 for (int i = 0; i < num2; i++)
-//                 {
-//                     AnalisarNome analisar = new AnalisarNome("", 0);
-//                     analisar.ReceberNome();
-
-//                     double SalBruto = analisar.SalBruto;
-//                     string Nome = analisar.Nome;
-
-//                     CalculoImpostoRenda calculo = new CalculoImpostoRenda();
-//                     calculo.CalcularImpostoRenda(SalBruto, Nome);
-
-//                     System.Console.WriteLine($"Nome: {analisar.Nome}");
-//                     System.Console.WriteLine($"Salário bruto: {analisar.SalBruto.ToString("C2")}");
-//                     System.Console.WriteLine($"Salário líquido: {calculo.salLiquido.ToString("C2")}");
-//                     System.Console.WriteLine($"Imposto: {calculo.desconto.ToString("C2")}");
-//                 }
-
-//                 Console.WriteLine("\nSe deseja voltar ao íncio para calcular mais um contribuinte, digite 'sim'. \nCaso contrário, só digitar qualquer outra coisa. ");
-//                 string sim = Console.ReadLine()!;
-//                 if (sim == "sim") Main(args);
-
-//             }
-//         }
-//         catch (Exception)
-//         {
-//             Console.WriteLine("\nDigite um valor válido.\nPressione qualquer tecla para voltar.");
-//             Console.ReadKey();
-//             Main(args);
-//         }
-//     }
-// }
-
-// ﻿using System;
-// using System.Security.Cryptography.X509Certificates;
-// namespace EvolucaoTestes.IRPF;
-
-// class Program
-// {
-//     static void Main(string[] args)
-//     {
-//         Console.Write("\nOlá! Quantos contribuintes iremos calcular? ");
-//         string num = Console.ReadLine()!;
-
-//         if (double.TryParse(num, out double num2))
-//         {
-//             for (int i = 0; i < num2; i++)
-//                 {
-//                     AnalisarNome analisar = new AnalisarNome("", 0);
-//                     analisar.ReceberNome();
-
-//                     double SalBruto = analisar.SalBruto;
-//                     string Nome = analisar.Nome;
-
-//                     CalculoImpostoRenda calculo = new CalculoImpostoRenda();
-//                     calculo.CalcularImpostoRenda(SalBruto, Nome);
-
-//                     System.Console.WriteLine($"Nome: {analisar.Nome}");
-//                     System.Console.WriteLine($"Salário bruto: {analisar.SalBruto.ToString("C2")}");
-//                     System.Console.WriteLine($"Salário líquido: {calculo.salLiquido.ToString("C2")}");
-//                     System.Console.WriteLine($"Imposto: {calculo.desconto.ToString("C2")}");
-//                 }
-//         }
-//         else if (num == "0")
-//         {
-//             Console.WriteLine("\nDigite um valor válido.\nPressione qualquer tecla para voltar.");
-//             Console.ReadKey();
-//             Main(args);
-//         }
-//         else
-//         {
-//             Console.WriteLine("\nDigite um valor válido.\nPressione qualquer tecla para voltar.");
-//             Console.ReadKey();
-//             Main(args);
-
-//         }
-//     }
-
-// }
-
-using System;
-using System.Security.Cryptography.X509Certificates;
+﻿using System;
 namespace EvolucaoTestes.IRPF;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Console.Write("\nOlá! Quantos contribuintes iremos calcular? ");
-        string num = Console.ReadLine()!;
+        receberContribuintes();
+    }
 
-        if (double.TryParse(num, out double num2) && num2 > 0)
+    private static void receberContribuintes()
+    {
+        try
         {
-            for (int i = 0; i < num2; i++)
+            Contribuinte contribuinte = receberNumeroContribuinte();
+
+            for (int i = 0; i < contribuinte.NumeroContribuintes; i++)
             {
-                AnalisarNome analisar = new AnalisarNome("", 0);
-                analisar.ReceberNome();
+                var nome = receberNome();
 
-                double SalBruto = analisar.SalBruto;
-                string Nome = analisar.Nome;
+                var salario = receberSalario();
 
-                CalculoImpostoRenda calculo = new CalculoImpostoRenda();
-                calculo.CalcularImpostoRenda(SalBruto, Nome);
+                ImpostoRenda calculo = new ImpostoRenda();
+                calculo.CalcularImpostoRenda(salario.SalarioBruto);
 
-                System.Console.WriteLine($"\nNome: {analisar.Nome}");
-                System.Console.WriteLine($"Salário bruto: {analisar.SalBruto.ToString("C2")}");
-                System.Console.WriteLine($"Salário líquido: {calculo.salLiquido.ToString("C2")}");
-                System.Console.WriteLine($"Imposto: {calculo.desconto.ToString("C2")}");
-
+                Console.WriteLine($"\nNome: {nome.Nome}");
+                Console.WriteLine($"Salário bruto: {salario.SalarioBruto.ToString("C2")}");
+                Console.WriteLine($"Desconto: {calculo.Desconto.ToString("C2")}");
+                Console.WriteLine($"Salário líquido: {calculo.SalarioLiquido.ToString("C2")}");
             }
-            System.Console.WriteLine("\nSe deseja voltar ao íncio para calcular mais um contribuinte, digite 'sim'. \nCaso contrário, só digitar qualquer outra coisa. ");
-            string sim = Console.ReadLine()!;
-            if (sim == "sim")
-            { Main(args); }
+            novamente();
         }
-        else
+        catch
         {
-            Console.WriteLine("\nDigite um valor válido.\nPressione qualquer tecla para voltar.");
-            Console.ReadKey();
-            Main(args);
+            Console.WriteLine("Erro inesperado. Procure o administrador do sistema");
+            Console.ReadLine();
+        }
+    }
 
+
+    private static Contribuinte receberNumeroContribuinte()
+    {
+        Console.Write("Quantos contribuintes iremos calcular? ");
+        string? numeroContribuintes = Console.ReadLine();
+        Contribuinte contribuinte = new Contribuinte();
+        try
+        {
+            contribuinte.ReceberNumeroContribuintes(numeroContribuintes);
+        }
+        catch (ArgumentNullException aNe)
+        {
+            Console.WriteLine(aNe.Message);
+            contribuinte = receberNumeroContribuinte();
+        }
+        catch
+        {
+            Console.WriteLine("Erro inesperado. Procure o administrador do sistema");
+            Console.ReadLine();
+        }
+        return contribuinte;
+    }
+
+    private static Pessoa receberNome()
+    {
+        Console.WriteLine("Qual seu nome? ");
+        string? nome = Console.ReadLine();
+        Pessoa novoNome = new Pessoa(nome);
+        try
+        {
+            novoNome.ReceberNome(nome);
+        }
+        catch (ArgumentNullException aNe)
+        {
+            Console.WriteLine(aNe.Message);
+            novoNome = receberNome();
+        }
+        catch
+        {
+            Console.WriteLine("Erro inesperado. Procure o administrador do sistema");
+            Console.ReadLine();
+        }
+        return novoNome;
+    }
+
+    private static Salario receberSalario()
+    {
+        Console.WriteLine("Qual seu salário bruto? ");
+        string? salarioBruto = Console.ReadLine();
+        Salario salario = new Salario();
+        try
+        {
+            salario.ReceberSalario(salarioBruto);
+        }
+        catch (ArgumentNullException aEx)
+        {
+            Console.WriteLine(aEx.Message);
+            salario = receberSalario();
+        }
+        catch
+        {
+            Console.WriteLine("Erro inesperado. Procure o administrador do sistema");
+            Console.ReadLine();
+        }
+        return salario;
+    }
+    private static void novamente()
+    {
+        System.Console.WriteLine("Deseja calcular novamente? Digite 'S'.");
+        try
+        {
+            string? resposta = Console.ReadLine();
+            if (resposta == "S")
+                receberContribuintes();
+
+            else Console.WriteLine("Até mais.");
+        }
+        catch
+        {
+            Console.WriteLine("Erro inesperado. Procure o administrador do sistema");
+            Console.ReadLine();
         }
     }
 
