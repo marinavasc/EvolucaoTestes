@@ -5,10 +5,10 @@ class Program
 {
     static void Main(string[] args)
     {
-        ReceberContribuintes();
+        receberContribuintes();
     }
 
-    private static void ReceberContribuintes()
+    private static void receberContribuintes()
     {
         try
         {
@@ -110,7 +110,7 @@ class Program
         {
             string? resposta = Console.ReadLine();
             if (resposta == "S")
-                ReceberContribuintes();
+                receberContribuintes();
 
             else Console.WriteLine("Até mais.");
         }
