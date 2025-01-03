@@ -107,7 +107,6 @@ class Program
         {
             Console.WriteLine("Erro inesperado. Procure o administrador do sistema");
             Console.ReadLine();
-            salario = receberSalario();
         }
         return salario;
     }
@@ -126,7 +125,6 @@ class Program
         {
             Console.WriteLine("Erro inesperado. Procure o administrador do sistema");
             Console.ReadLine();
-            Novamente();
         }
     }
 
