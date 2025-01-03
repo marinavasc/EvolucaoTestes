@@ -5,66 +5,60 @@ class Program
 {
     static void Main(string[] args)
     {
-        RecebendoContribuintes();
+        ReceberContribuintes();
     }
 
-    private static void RecebendoContribuintes()
+    private static void ReceberContribuintes()
     {
-        Console.Write("\nOlá! Quantos contribuintes iremos calcular? ");
         try
         {
-            if (double.TryParse(Console.ReadLine(), out double numContribuintes) && numContribuintes > 0)
+            Contribuinte contribuinte = receberNumeroContribuinte();
+
+            for (int i = 0; i < contribuinte.NumeroContribuintes; i++)
             {
-                for (int i = 0; i < numContribuintes; i++)
-                {
-                    var nome = receberNome();
+                var nome = receberNome();
 
-                    var salario = receberSalario();
+                var salario = receberSalario();
 
-                    ImpostoRenda calculo = new ImpostoRenda();
-                    calculo.CalcularImpostoRenda(salario.SalarioBruto);
+                ImpostoRenda calculo = new ImpostoRenda();
+                calculo.CalcularImpostoRenda(salario.SalarioBruto);
 
-                    Console.WriteLine($"\nNome: {nome.Nome}");
-                    Console.WriteLine($"Salário bruto: {salario.SalarioBruto.ToString("C2")}");
-                    Console.WriteLine($"Desconto: {calculo.Desconto.ToString("C2")}");
-                    Console.WriteLine($"Salário líquido: {calculo.SalarioLiquido.ToString("C2")}");
-                }
-                Novamente();
+                Console.WriteLine($"\nNome: {nome.Nome}");
+                Console.WriteLine($"Salário bruto: {salario.SalarioBruto.ToString("C2")}");
+                Console.WriteLine($"Desconto: {calculo.Desconto.ToString("C2")}");
+                Console.WriteLine($"Salário líquido: {calculo.SalarioLiquido.ToString("C2")}");
             }
-            else
-            {
-                Console.WriteLine("\nDigite um valor válido.");
-                RecebendoContribuintes();
-            }
+            Novamente();
         }
         catch
         {
             Console.WriteLine("Erro inesperado. Procure o administrador do sistema");
             Console.ReadLine();
-            RecebendoContribuintes();
+            ReceberContribuintes();
         }
     }
 
+
     private static Contribuinte receberNumeroContribuinte()
     {
-        Console.WriteLine("Quantos contribuintes iremos calcular? ");
-        string? contribuinte = Console.ReadLine();
-        Contribuinte contribuinteInt = new Contribuinte(contribuinte);
+        Console.Write("Quantos contribuintes iremos calcular? ");
+        string? numeroContribuintes = Console.ReadLine();
+        Contribuinte contribuinte = new Contribuinte();
         try
         {
-            contribuinteInt.ReceberNumeroContribuintes();
+            contribuinte.ReceberNumeroContribuintes(numeroContribuintes);
         }
         catch (ArgumentNullException aNe)
         {
             Console.WriteLine(aNe.Message);
-            contribuinteInt = receberNumeroContribuinte();
+            contribuinte = receberNumeroContribuinte();
         }
         catch
         {
             Console.WriteLine("Erro inesperado. Procure o administrador do sistema");
             Console.ReadLine();
         }
-        return contribuinteInt;
+        return contribuinte;
     }
 
     private static Pessoa receberNome()
@@ -117,9 +111,9 @@ class Program
         {
             string? resposta = Console.ReadLine();
             if (resposta == "S")
-                RecebendoContribuintes();
-            
-            else Console.WriteLine("Até mais.");            
+                ReceberContribuintes();
+
+            else Console.WriteLine("Até mais.");
         }
         catch
         {

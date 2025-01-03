@@ -3,15 +3,16 @@ namespace EvolucaoTestes.IRPF;
 
 public class Contribuinte
 {
-    public string NumeroContribuintes { get; set; }
+    public int NumeroContribuintes { get; set; }
 
-    public Contribuinte(string numeroContribuintes)
-    { 
-        NumeroContribuintes = numeroContribuintes;
-    }
-
-    public void ReceberNumeroContribuintes()
+    public void ReceberNumeroContribuintes(string contribuinteS)
     {
-        if (!int.TryParse(NumeroContribuintes, out int numeroContribuinteInt)) throw new ArgumentNullException("Número de contribuintes", "Número de contribuintes obrigatório. Digite novamente.");
+        if (string.IsNullOrWhiteSpace(contribuinteS)) throw new ArgumentNullException("Contribuintes","É obrigatório um número de contribuintes. Digite novamente.");
+
+        else if (contribuinteS == "0") throw new ArgumentNullException("Contribuintes","É obrigatório um número de contribuintes. Digite novamente.");
+       
+        else if (int.TryParse(contribuinteS, out int numeroContribuinteInt)) NumeroContribuintes = numeroContribuinteInt;
+        
+        else throw new ArgumentNullException("Contribuintes","Número de contribuintes inválido. Digite novamente.");
     }
 }
