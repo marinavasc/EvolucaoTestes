@@ -49,22 +49,22 @@ class Program
     {
         Console.WriteLine("Quantos contribuintes iremos calcular? ");
         string? contribuinte = Console.ReadLine();
-        Contribuinte novoNome = new Contribuinte(contribuinte);
+        Contribuinte contribuinteInt = new Contribuinte(contribuinte);
         try
         {
-            novoNome.ReceberNumeroContribuintes(contribuinte);
+            contribuinteInt.ReceberNumeroContribuintes();
         }
         catch (ArgumentNullException aNe)
         {
             Console.WriteLine(aNe.Message);
-            novoNome = receberNumeroContribuinte();
+            contribuinteInt = receberNumeroContribuinte();
         }
         catch
         {
             Console.WriteLine("Erro inesperado. Procure o administrador do sistema");
             Console.ReadLine();
         }
-        return novoNome;
+        return contribuinteInt;
     }
 
     private static Pessoa receberNome()

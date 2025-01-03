@@ -10,9 +10,8 @@ public class Contribuinte
         NumeroContribuintes = numeroContribuintes;
     }
 
-    public void ReceberNumeroContribuintes(string numeroContribuintes)
+    public void ReceberNumeroContribuintes()
     {
         if (!int.TryParse(NumeroContribuintes, out int numeroContribuinteInt)) throw new ArgumentNullException("Número de contribuintes", "Número de contribuintes obrigatório. Digite novamente.");
     }
-
 }
