@@ -6,31 +6,45 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.Write("\nOlá! Quantos contribuintes iremos calcular? ");
-        if (double.TryParse(Console.ReadLine(), out double numContribuintes) && numContribuintes > 0)
-        {
-            for (int i = 0; i < numContribuintes; i++)
-            {
-                var nome = receberNome();
-
-                var salario = receberSalario();
-
-                CalculoImpostoRenda calculo = new CalculoImpostoRenda();
-                calculo.CalcularImpostoRenda(salario.SalBruto);
-
-                Console.WriteLine($"\nNome: {nome.Nome}");
-                Console.WriteLine($"Salário bruto: {salario.SalBruto.ToString("C2")}");
-                Console.WriteLine($"Salário líquido: {calculo.SalLiquido.ToString("C2")}");
-                Console.WriteLine($"Imposto: {calculo.Desconto.ToString("C2")}\n");
-            }
-        }
-        else
-        {
-            Console.WriteLine("\nDigite um valor válido.");
-            // voltar ao inicio
-        }
+        NumContribuintes();
     }
 
+    private static void NumContribuintes()
+    {
+        Console.Write("\nOlá! Quantos contribuintes iremos calcular? ");
+        try
+        {
+            if (double.TryParse(Console.ReadLine(), out double numContribuintes) && numContribuintes > 0)
+            {
+                for (int i = 0; i < numContribuintes; i++)
+                {
+                    var nome = receberNome();
+
+                    var salario = receberSalario();
+
+                    CalculoImpostoRenda calculo = new CalculoImpostoRenda();
+                    calculo.CalcularImpostoRenda(salario.SalBruto);
+
+                    Console.WriteLine($"\nNome: {nome.Nome}");
+                    Console.WriteLine($"Salário bruto: {salario.SalBruto.ToString("C2")}");
+                    Console.WriteLine($"Desconto: {calculo.Desconto.ToString("C2")}");
+                    Console.WriteLine($"Salário líquido: {calculo.SalLiquido.ToString("C2")}");
+                    Novamente();
+                }
+            }
+            else
+            {
+                Console.WriteLine("\nDigite um valor válido.");
+                NumContribuintes();
+            }
+        }
+        catch
+        {
+            Console.WriteLine("Erro inesperado. Procure o administrador do sistema");
+            Console.ReadLine();
+            NumContribuintes();
+        }
+    }
 
     private static AnalisarNome receberNome()
     {
@@ -44,13 +58,13 @@ class Program
         catch (ArgumentNullException aNe)
         {
             Console.WriteLine(aNe.Message);
-            receberNome();
+            novoNome = receberNome();
         }
         catch
         {
             Console.WriteLine("Erro inesperado. Procure o administrador do sistema");
             Console.ReadLine();
-            receberNome();
+            novoNome = receberNome();
         }
         return novoNome;
     }
@@ -67,14 +81,33 @@ class Program
         catch (ArgumentNullException aEx)
         {
             Console.WriteLine(aEx.Message);
-            receberSalario();
+            salario = receberSalario();
         }
         catch
         {
             Console.WriteLine("Erro inesperado. Procure o administrador do sistema");
             Console.ReadLine();
-            receberSalario();
+            salario = receberSalario();
         }
         return salario;
     }
+    private static void Novamente()
+    {
+        System.Console.WriteLine("Deseja calcular novamente? Digite 'S'.");
+        try
+        {
+            string? resposta = Console.ReadLine();
+            if (resposta == "S")
+                NumContribuintes();
+            
+            else Console.WriteLine("Até mais.");            
+        }
+        catch
+        {
+            Console.WriteLine("Erro inesperado. Procure o administrador do sistema");
+            Console.ReadLine();
+            Novamente();
+        }
+    }
+
 }
