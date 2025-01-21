@@ -15,4 +15,25 @@ public class Contribuinte
         
         else throw new ArgumentNullException("Contribuintes","Número de contribuintes inválido. Digite novamente.");
     }
+
+    public void TestarReceberNumeroContribuintes(string? entrada)
+{
+    if (string.IsNullOrWhiteSpace(entrada))
+    {
+        throw new ArgumentNullException(nameof(entrada), "Entrada não pode ser nula ou vazia.");
+    }
+
+    if (!int.TryParse(entrada, out int numero))
+    {
+        throw new FormatException("A entrada precisa ser um número válido.");
+    }
+
+    if (numero <= 0)
+    {
+        throw new ArgumentOutOfRangeException(nameof(entrada), "O número deve ser maior que zero.");
+    }
+
+    NumeroContribuintes = numero;
+}
+
 }

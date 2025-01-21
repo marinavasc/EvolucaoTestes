@@ -10,7 +10,7 @@ public class TesteReceberSalario
     {
         //arrange
         var salario = new Salario();
-        salario.SalarioBruto = 5000; 
+        salario.SalarioBruto = 5000; //teste
 
         //act
         var resultado = salario.SalarioBruto;
