@@ -8,13 +8,20 @@ public class TesteReceberNome
     public void TesteReceberNomeContribuinteVazio()
     {
         // Arrange
-        var nome = new Pessoa("");
+        string nomeVazio = "";
 
-        // Act
-        var resultado = nome.Nome;
+        // Act e Assert
+        Assert.Throws<ArgumentNullException>(() => new Pessoa(nomeVazio));
+    }
 
-        // Assert
-        Assert.Equal("", resultado);
+    [Fact]
+    public void TesteReceberNomeContribuinteNulo()
+    {
+        // Arrange
+        string? nomeNulo = null;
+
+        // Act e Assert
+        Assert.Throws<ArgumentNullException>(() => new Pessoa(nomeNulo!));
     }
 
     [Fact]
@@ -28,15 +35,5 @@ public class TesteReceberNome
 
         // Assert
         Assert.Equal("João Silva", resultado);
-    }
-
-    [Fact]
-    public void TesteReceberNomeContribuinteNulo()
-    {
-        // Arrange
-        var nome = new Pessoa(null!);
-
-        // Act & Assert
-        Assert.Null(nome.Nome);
     }
 }
