@@ -10,7 +10,7 @@ public class TesteImpostoRenda
     {
         //arrange
         var impostoRenda = new ImpostoRenda();
-        //impostoRenda.Desconto = 500;
+        impostoRenda.Desconto = 500;
 
         //act
         var resultado = impostoRenda.Desconto;
@@ -24,7 +24,7 @@ public class TesteImpostoRenda
     {
         //arrange
         var impostoRenda = new ImpostoRenda();
-        //impostoRenda.SalarioLiquido = 4500;
+        impostoRenda.SalarioLiquido = 4500;
 
         //act
         var resultado = impostoRenda.SalarioLiquido;
