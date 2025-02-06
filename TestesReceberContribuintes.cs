@@ -4,7 +4,7 @@ namespace EvolucaoTestes.IRPF;
 
 public class TesteReceberContribuinte
 {
-        [Theory]
+    [Theory]
     [InlineData("5", 5)]
     [InlineData("10", 10)]
     [InlineData("2", 2)]
@@ -19,4 +19,5 @@ public class TesteReceberContribuinte
         // Assert
         Assert.Equal(numeroEsperado, contribuinte.NumeroContribuintes);
     }
+    
 }

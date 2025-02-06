@@ -12,7 +12,7 @@ public class TesteReceberNome
  public void TesteReceberNomeValido(string nome)
  {
      // Arrange
-     var pessoa = new Pessoa(nome); 
+     var pessoa = new Pessoa("nome padrão"); 
 
      // Act
      pessoa.ReceberNome(nome);
