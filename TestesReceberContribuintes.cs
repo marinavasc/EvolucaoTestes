@@ -2,41 +2,21 @@ using System;
 using Xunit;
 namespace EvolucaoTestes.IRPF;
 
-public class TesteReceberNomeContribuinte
+public class TesteReceberContribuinte
 {
-
-    [Fact]
-    public void TesteContribuinteNulo()
+        [Theory]
+    [InlineData("5", 5)]
+    [InlineData("10", 10)]
+    [InlineData("2", 2)]
+    public void TesteNumeroContribuintesValidos(string entradaValida, int numeroEsperado)
     {
         // Arrange
         var contribuinte = new Contribuinte();
-        string? entradaNula = null;
-
-        // Act e Assert
-        Assert.Throws<ArgumentNullException>(() => contribuinte.TestarReceberNumeroContribuintes(entradaNula!));
-    }
-
-    [Fact]
-    public void TesteNumeroContribuintesValidos()
-    { // Arrange
-        var contribuinte = new Contribuinte();
-        string entradaValida = "5";
 
         // Act
-        contribuinte.TestarReceberNumeroContribuintes(entradaValida);
+        contribuinte.ReceberNumeroContribuintes(entradaValida);
 
         // Assert
-        Assert.Equal(5, contribuinte.NumeroContribuintes);
-    }
-
-    [Fact]
-    public void TesteNumeroContribuintesInvalidos()
-    {
-        // Arrange
-        var contribuinte = new Contribuinte();
-        string entradaInvalida = "abc";
-
-        // Act e Assert
-        Assert.Throws<FormatException>(() => contribuinte.TestarReceberNumeroContribuintes(entradaInvalida));
+        Assert.Equal(numeroEsperado, contribuinte.NumeroContribuintes);
     }
 }

@@ -5,31 +5,18 @@ namespace EvolucaoTestes.IRPF;
 
 public class TesteImpostoRenda
 {
-    [Fact]
-    public void TesteImpostoRendaDesconto()
-    {
-        //arrange
-        var impostoRenda = new ImpostoRenda();
-        impostoRenda.Desconto = 500;
+           [Theory]
+[InlineData(1500, 0)]
+[InlineData(2500, 44.70)]
+[InlineData(3500, 170.20)]
+[InlineData(4500, 376.37)]
+[InlineData(5500, 643.14)]
+public void TesteImposto(double salarioBruto, double resultado)
+{
+    var impostoRenda = new ImpostoRenda();
 
-        //act
-        var resultado = impostoRenda.Desconto;
+    impostoRenda.CalcularImpostoRenda(salarioBruto);
 
-        //assert
-        Assert.Equal(500, resultado);
-    }
-
-    [Fact]
-    public void TesteImpostoRendaSalarioLiquido()
-    {
-        //arrange
-        var impostoRenda = new ImpostoRenda();
-        impostoRenda.SalarioLiquido = 4500;
-
-        //act
-        var resultado = impostoRenda.SalarioLiquido;
-
-        //assert
-        Assert.Equal(4500, resultado);
-    }
+    Assert.Equal(resultado,impostoRenda.Desconto);
+}
 } 

@@ -5,43 +5,18 @@ namespace EvolucaoTestes.IRPF;
 
 public class TesteReceberSalario 
 {
-   [Fact]
-public void TesteReceberSalarioBruto()
-{
-    //arrange
-    var salario = new Salario();
-    salario.SalarioBruto = 5000; 
-
-    //act
-    var resultado = salario.SalarioBruto;
-
-    //assert
-    Assert.Equal(5000, resultado);
-}
-
-[Fact]
-public void TesteReceberSalarioBrutoLetras()
+    [Theory]
+[InlineData("5000", 5000)]
+[InlineData("3000", 3000)]
+public void TesteReceberSalarioBruto(string salarioBruto, double salarioEsperado)
 {
     // Arrange
     var salario = new Salario();
 
-    // Act e Assert
-    Assert.Throws<FormatException>(() =>
-    {
-        salario.SalarioBruto = Convert.ToDouble("abc");
-    });
-}
+    // Act
+    salario.ReceberSalario(salarioBruto); 
 
-[Fact]
-public void TesteReceberSalarioBrutoVazio()
-{
-    // Arrange
-    var salario = new Salario();
-
-    // Act e Assert
-    Assert.Throws<FormatException>(() =>
-    {
-        salario.SalarioBruto = Convert.ToDouble("");
-    });
+    // Assert
+    Assert.Equal(salarioEsperado, salario.SalarioBruto);
 }
 }
