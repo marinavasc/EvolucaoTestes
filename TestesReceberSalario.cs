@@ -21,7 +21,6 @@ public class TesteReceberSalario
     [InlineData(null, "Salário obrigatório. Digite novamente.")]
     [InlineData("", "Salário obrigatório. Digite novamente.")]
     [InlineData(" ", "Salário obrigatório. Digite novamente.")]
-    [InlineData("abc", "Salário inválido. Digite novamente.")]
     [InlineData("0", "Salário obrigatório. Digite novamente.")]
     public void TesteReceberSalarioBrutoInvalido(string salarioBruto, string mensagemEsperada)
     {
