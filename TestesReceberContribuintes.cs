@@ -10,13 +10,10 @@ public class TesteReceberContribuinte
     [InlineData("2", 2)]
     public void TesteNumeroContribuintesValidos(string entradaValida, int numeroEsperado)
     {
-        // Arrange
         var contribuinte = new Contribuinte();
 
-        // Act
         contribuinte.ReceberNumeroContribuintes(entradaValida);
 
-        // Assert
         Assert.Equal(numeroEsperado, contribuinte.NumeroContribuintes);
     }
 

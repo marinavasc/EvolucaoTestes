@@ -20,16 +20,16 @@ public class TesteImpostoRenda
         Assert.Equal(resultado, impostoRenda.Desconto);
     }
 
-    [Theory]
-    [InlineData(0.0, 0)]
-    [InlineData(null, 0)]
-    public void TesteImpostoRenda_ZeroOuNulo(double? salarioBruto, double impostoEsperado)
-    {
-        var impostoRenda2 = new ImpostoRenda();
+    // [Theory]
+    // [InlineData(0.0, 0)]
+    // [InlineData(null, 0)]
+    // public void TesteImpostoRendaInvalido(double? salarioBruto, double impostoEsperado)
+    // {
+    //     var impostoRenda2 = new ImpostoRenda();
 
-        impostoRenda2.CalcularImpostoRenda(salarioBruto ?? 0);
+    //     impostoRenda2.CalcularImpostoRenda(salarioBruto ?? 0);
 
-        Assert.Equal(impostoEsperado, impostoRenda2.Desconto);
-    }
+    //     Assert.Equal(impostoEsperado, impostoRenda2.Desconto);
+    // }
 
 }

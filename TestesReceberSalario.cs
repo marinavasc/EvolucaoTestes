@@ -10,13 +10,10 @@ public class TesteReceberSalario
     [InlineData("3000", 3000)]
     public void TesteReceberSalarioBruto(string salarioBruto, double salarioEsperado)
     {
-        // Arrange
         var salario = new Salario();
 
-        // Act
         salario.ReceberSalario(salarioBruto);
 
-        // Assert
         Assert.Equal(salarioEsperado, salario.SalarioBruto);
     }
 

@@ -11,13 +11,10 @@ public class TesteReceberNome
     [InlineData("João Pedro")]
     public void TesteReceberNomeValido(string nome)
     {
-        // Arrange
         var pessoa = new Pessoa("nome padrão");
 
-        // Act
         pessoa.ReceberNome(nome);
 
-        // Assert
         Assert.Equal(nome, pessoa.Nome);
     }
 
@@ -27,10 +24,8 @@ public class TesteReceberNome
     [InlineData(" ")]
     public void TesteReceberNomeInvalido(string nomeInvalido)
     {
-        // Arrange
         var pessoa = new Pessoa("Nome Padrão");
 
-        // Act & Assert
         var ex = Assert.Throws<ArgumentNullException>(() => pessoa.ReceberNome(nomeInvalido));
         Assert.Contains("Nome inválido", ex.Message);
     }
