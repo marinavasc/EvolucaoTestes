@@ -19,17 +19,4 @@ public class TesteImpostoRenda
 
         Assert.Equal(resultado, Math.Round(impostoRenda.Desconto, 2));
     }
-
-    // [Theory]
-    // [InlineData(0.0, 0)]
-    // [InlineData(null, 0)]
-    // public void TesteImpostoRendaInvalido(double? salarioBruto, double impostoEsperado)
-    // {
-    //     var impostoRenda2 = new ImpostoRenda();
-
-    //     impostoRenda2.CalcularImpostoRenda(salarioBruto ?? 0);
-
-    //     Assert.Equal(impostoEsperado, impostoRenda2.Desconto);
-    // }
-
 }
