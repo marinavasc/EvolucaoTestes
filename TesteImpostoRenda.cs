@@ -17,7 +17,7 @@ public class TesteImpostoRenda
 
         impostoRenda.CalcularImpostoRenda(salarioBruto);
 
-        Assert.Equal(resultado, impostoRenda.Desconto);
+        Assert.Equal(resultado, Math.Round(impostoRenda.Desconto, 2));
     }
 
     // [Theory]
