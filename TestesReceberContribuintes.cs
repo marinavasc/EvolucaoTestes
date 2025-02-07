@@ -19,5 +19,19 @@ public class TesteReceberContribuinte
         // Assert
         Assert.Equal(numeroEsperado, contribuinte.NumeroContribuintes);
     }
-    
+
+    [Theory]
+    [InlineData(null, "É obrigatório um número de contribuintes. Digite novamente.")]
+    [InlineData("", "É obrigatório um número de contribuintes. Digite novamente.")]
+    [InlineData(" ", "É obrigatório um número de contribuintes. Digite novamente.")]
+    [InlineData("0", "É obrigatório um número de contribuintes. Digite novamente.")]
+    public void TesteReceberNumeroContribuintesInvalido(string entrada, string mensagemEsperada)
+    {
+        var contribuinte = new Contribuinte();
+
+        var ex = Assert.Throws<ArgumentNullException>(() => contribuinte.ReceberNumeroContribuintes(entrada));
+
+        Assert.Contains(mensagemEsperada, ex.Message);
+    }
+
 }
