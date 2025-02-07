@@ -3,8 +3,8 @@ namespace EvolucaoTestes.IRPF;
 
 public class ImpostoRenda
 {
-    public double Desconto { get; private set; }
-    public double SalarioLiquido { get; private set; }
+    public double Desconto { get; set; }
+    public double SalarioLiquido { get; set; }
     private double aliquota = 0;
     private double deducao = 0;
 

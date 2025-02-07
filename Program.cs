@@ -24,7 +24,7 @@ class Program
                 calculo.CalcularImpostoRenda(salario.SalarioBruto);
 
                 Console.WriteLine($"\nNome: {nome.Nome}");
-                Console.WriteLine($"Salário bruto: {salario.SalarioBruto.ToString("C2")}");
+                Console.WriteLine($"Salário bruto: {(salario.SalarioBruto).ToString("C2")}");
                 Console.WriteLine($"Desconto: {calculo.Desconto.ToString("C2")}");
                 Console.WriteLine($"Salário líquido: {calculo.SalarioLiquido.ToString("C2")}");
             }
